@@ -4,7 +4,7 @@ var newMap;
 /**
  * Initialize map as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {  
+document.addEventListener('DOMContentLoaded', (event) => {
   initMap();
 });
 
@@ -15,26 +15,26 @@ initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
-    } else {      
+    } else {
       self.newMap = L.map('map', {
         center: [restaurant.latlng.lat, restaurant.latlng.lng],
         zoom: 16,
         scrollWheelZoom: false
       });
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-        mapboxToken: '<your MAPBOX API KEY HERE>',
+        mapboxToken: 'pk.eyJ1IjoicGF1bG1yZWVzZSIsImEiOiJjamt6djFnaHgweTZ4M3JxdHducmVlZnQxIn0.u6pbWnmkc2D36Rc_DyA1rw',
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
           '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
           'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        id: 'mapbox.streets'    
+        id: 'mapbox.streets'
       }).addTo(newMap);
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
   });
-}  
- 
+}
+
 /* window.initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
@@ -148,19 +148,30 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
+
+  const ratingContainer = document.createElement('div');
+  ratingContainer.className = 'rating-container';
+  li.appendChild(ratingContainer);
+
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  li.appendChild(name);
+  name.classList.add('reviewer-name');
+  ratingContainer.appendChild(name);
+
+  const ratingStars = document.createElement('p');
+  ratingStars.classList.add('rating-stars');
+  for (let i = 0; i < review.rating; i++) {
+    ratingStars.append('\u2605')
+  }
+  ratingContainer.appendChild(ratingStars);
 
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  date.className = 'time-container';
+  date.innerHTML = '<time class="review-date">' + review.date + '</time>';
   li.appendChild(date);
 
-  const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
-
   const comments = document.createElement('p');
+  comments.classList.add('review-text');
   comments.innerHTML = review.comments;
   li.appendChild(comments);
 
