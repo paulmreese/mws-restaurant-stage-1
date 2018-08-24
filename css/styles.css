@@ -412,6 +412,26 @@ nav h1 a {
 }
 
 /* Media Queries */
+@media screen and (max-width: 400px) {
+	nav h1 a {
+		font-size: 16px;
+		letter-spacing: 6px;
+	}
+
+	.filter-options select {
+		width: 100%;
+	}
+
+	#restaurants-list li a {
+		text-align: center;
+		display: flex;
+		padding: 10px 0;
+		margin: 10px auto 0;
+		align-content: center;
+		justify-content: center;
+	}
+}
+
 @media screen and (min-width: 500px) {
 	nav h1 a {
   	font-size: 20px;
