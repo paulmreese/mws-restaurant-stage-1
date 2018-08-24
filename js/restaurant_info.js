@@ -149,6 +149,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review) => {
   const li = document.createElement('li');
 
+  //Container for formatting reviews
   const ratingContainer = document.createElement('div');
   ratingContainer.className = 'rating-container';
   li.appendChild(ratingContainer);
@@ -158,6 +159,7 @@ createReviewHTML = (review) => {
   name.classList.add('reviewer-name');
   ratingContainer.appendChild(name);
 
+  //Takes the user's rating and displays it in stars
   const ratingStars = document.createElement('p');
   ratingStars.classList.add('rating-stars');
   for (let i = 0; i < review.rating; i++) {

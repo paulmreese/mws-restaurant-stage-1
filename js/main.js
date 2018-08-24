@@ -88,19 +88,8 @@ initMap = () => {
   }).addTo(newMap);
 
   updateRestaurants();
+
 }
-/* window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
-  });
-  updateRestaurants();
-} */
 
 /**
  * Update page and map for current restaurants.
@@ -161,9 +150,8 @@ createRestaurantHTML = (restaurant) => {
 
   //create a containing picture
   const picture = document.createElement('picture');
-  //create a source for smallest screens
+  //create a source for smaller screens
   const smallScreenSource = document.createElement('source');
-  //smallScreenSource.className = 'restaurant-img';
   smallScreenSource.srcset = DBHelper.smallImageUrlForRestaurant(restaurant);
   smallScreenSource.media = '(max-width: 450px)';
 
@@ -199,6 +187,7 @@ createRestaurantHTML = (restaurant) => {
 /**
  * Add markers for current restaurants to the map.
  */
+
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
@@ -211,16 +200,7 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 
 }
-/* addMarkersToMap = (restaurants = self.restaurants) => {
-  restaurants.forEach(restaurant => {
-    // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-      window.location.href = marker.url
-    });
-    self.markers.push(marker);
-  });
-} */
+
 
 /**
  *Register Service Worker
@@ -249,11 +229,5 @@ registerServiceWorker = function() {
     reg.addEventListener('updatefound', function() {
       indexController._trackInstalling(reg.installing);
     });
-  });
-
-  // TODO: listen for the controlling service worker changing
-  // and reload the page
-  navigator.serviceWorker.addEventListener('controllerchange', function() {
-    window.location.reload();
   });
 }
