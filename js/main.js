@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added
   fetchNeighborhoods();
   fetchCuisines();
+  registerServiceWorker();
 });
 
 /**
@@ -158,6 +159,13 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
+  //create a containing picture
+  const picture = document.createElement('picture');
+  //create a source for smallest screens
+  const smallScreenSource = document.createElement('source');
+  smallScreenSource.className = 'restaurant-img';
+  smallScreenSource.srcset = '';
+
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
@@ -208,3 +216,39 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 } */
+
+/**
+ *Register Service Worker
+ */
+
+registerServiceWorker = function() {
+  if (!navigator.serviceWorker) return;
+
+  var indexController = this;
+
+  navigator.serviceWorker.register('js/sw/sw.js').then(function(reg) {
+    if (!navigator.serviceWorker.controller) {
+      return;
+    }
+
+    if (reg.waiting) {
+      indexController._updateReady(reg.waiting);
+      return;
+    }
+
+    if (reg.installing) {
+      indexController._trackInstalling(reg.installing);
+      return;
+    }
+
+    reg.addEventListener('updatefound', function() {
+      indexController._trackInstalling(reg.installing);
+    });
+  });
+
+  // TODO: listen for the controlling service worker changing
+  // and reload the page
+  navigator.serviceWorker.addEventListener('controllerchange', function() {
+    window.location.reload();
+  });
+}
