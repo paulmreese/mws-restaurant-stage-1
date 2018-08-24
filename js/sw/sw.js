@@ -3,6 +3,7 @@ let staticCacheName = 'restaurant-reviews-static-v5';
 //create a list of the images, adds images (as they are numbered 1-10)
 let listOfResources = [];
 for (let i = 1; i <= 10; i++) {
+  listOfResources.push('/img/' + i + '-small.jpg');
   listOfResources.push('/img/' + i + '.jpg');
 }
 //add main pages to resources for caching
