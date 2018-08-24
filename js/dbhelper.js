@@ -154,7 +154,7 @@ class DBHelper {
   }
 
   /**
-   * Restaurant Small image URL
+   * Restaurant Small image URL.
    */
   static smallImageUrlForRestaurant(restaurant) {
     return (`/img/${restaurant.small_photo}`)
