@@ -1,4 +1,4 @@
-let staticCacheName = 'restaurant-reviews-static-v5';
+let staticCacheName = 'restaurant-reviews-static-v6';
 
 //create a list of the images, adds images (as they are numbered 1-10)
 let listOfResources = [];

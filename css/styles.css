@@ -7,11 +7,12 @@ body,td,th,p{
 	color: #333;
 	line-height: 1.5;
 }
+
 body, html {
 	margin: 0 auto;
 	padding: 0;
 	height: 100%;
-  width: 100%;
+	width: 100%;
 	max-width: 980px;
 }
 
@@ -77,11 +78,17 @@ nav h1 a {
   letter-spacing: 10px;
   text-transform: uppercase;
 }
+
+nav#breadcrumb-container {
+	width: 100%;
+	text-align: left;
+}
+
 #breadcrumb {
     padding: 15px 40px;
     list-style: none;
     background-color: #eee;
-
+		text-align: left;
     margin: 0;
 }
 

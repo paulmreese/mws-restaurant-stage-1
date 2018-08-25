@@ -211,7 +211,7 @@ registerServiceWorker = function() {
 
   var indexController = this;
 
-  navigator.serviceWorker.register('js/sw/sw.js').then(function(reg) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
     if (!navigator.serviceWorker.controller) {
       return;
     }
